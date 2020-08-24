@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+Route::match(['get', 'post'], '/admin','AdminController@login');
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts/welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('/home');
