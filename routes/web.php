@@ -18,6 +18,17 @@ Route::match(['get', 'post'], '/admin','AdminController@login');
 Route::get('/', function () {
     return view('layouts/welcome');
 });
+Route::get('/admin/dashboard', 'AdminController@dashboard');
+
+Route::get('/logout', 'AdminController@logout');
+
+Route::get('/admin/setting', 'AdminController@setting');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/admin/check-pwd', 'AdminController@check_pwd');
+});
+
+
 
 Auth::routes();
 
