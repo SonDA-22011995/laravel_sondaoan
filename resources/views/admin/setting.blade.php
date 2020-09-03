@@ -6,6 +6,15 @@
     <div id="breadcrumb"> <a href="{{url('/admin/dashboard')}}" title="Go to Home" class="tip-bottom"><i class="icon-home"></i> Home</a> <a href="{{url('/admin/setting')}}"><strong>Setting</strong></a></div>
       <h1>Password Setting</h1>
     </div>
+    @if(Session::has('flash_message_error'))
+            <div class="alert alert-danger" role="alert">
+                {{Session('flash_message_error')}}
+            </div>
+        @elseif(Session::has('flash_message_success'))
+            <div class="alert alert-success" role="alert">
+                {{Session('flash_message_success')}}
+            </div>
+        @endif
     <div class="container-fluid"><hr>
       
         <div class="row-fluid">
@@ -15,11 +24,13 @@
                 <h5>Update Password</h5>
               </div>
               <div class="widget-content nopadding">
-                <form class="form-horizontal" method="post" action="#" name="password_validate" id="password_validate" novalidate="novalidate">
+              <form class="form-horizontal" method="post" action="{{url('/admin/update-pwd')}}" name="password_validate" id="password_validate" novalidate="novalidate">
+                {{ csrf_field() }}
                   <div class="control-group">
                     <label class="control-label"> Current Password</label>
                     <div class="controls">
                       <input type="password" name="current_password" id="current_password" />
+                      <span id="chkpwd"></span>
                     </div>
                   </div>
                   <div class="control-group">
